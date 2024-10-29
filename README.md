@@ -1,8 +1,6 @@
 # Calories Burnt Prediction Model
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Python](https://img.shields.io/badge/python-3.8%2B-blue.svg)
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
 ## Table of Contents
 
@@ -380,16 +378,7 @@ Contributions are welcome! Please follow these steps:
 
 5. **Open a Pull Request**
 
-## License
-
-This project is licensed under the [MIT License](LICENSE).
-
 ## Acknowledgements
 
 - **Kaggle:** For providing the datasets.
-- **OpenAI's ChatGPT:** For assisting in project documentation and explanations.
 - **Community Contributors:** For their valuable insights and support.
-
----
-
-**Note:** The project achieves exceptionally high R² scores close to 1.00, which is uncommon and may indicate potential overfitting or data leakage. It's crucial to ensure that the data preprocessing and model training steps are correctly implemented to maintain model integrity.
