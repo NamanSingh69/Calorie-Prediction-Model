@@ -1,195 +1,395 @@
-Calories Burned Prediction Project
+# Calories Burnt Prediction Model
 
-Welcome to the Calories Burned Prediction project repository! This project aims to develop a robust machine learning model to accurately predict the number of calories burned during various physical activities based on sensor data. Below is a comprehensive overview of the project, including its objectives, methodology, models used, and results.
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![Python](https://img.shields.io/badge/python-3.8%2B-blue.svg)
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
+## Table of Contents
 
-Table of Contents
+- [Project Overview](#project-overview)
+- [Data Description](#data-description)
+- [Project Structure](#project-structure)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Model Explanation](#model-explanation)
+- [Model Interpretability](#model-interpretability)
+- [Hyperparameter Tuning](#hyperparameter-tuning)
+- [Evaluation Metrics](#evaluation-metrics)
+- [Saving and Deployment](#saving-and-deployment)
+- [Contributing](#contributing)
+- [License](#license)
+- [Acknowledgements](#acknowledgements)
 
-[Project Overview](https://github.com/NamanSingh69/Calorie-Prediction-Model/wiki/Home/_edit#project-overview)
+## Project Overview
 
-[Dataset](https://github.com/NamanSingh69/Calorie-Prediction-Model/wiki/Home/_edit#dataset)
+The **Calories Burnt Prediction Model** is a comprehensive machine learning project aimed at predicting the number of calories burned by individuals based on various personal and exercise-related metrics. Utilizing advanced machine learning techniques and deep learning models, the project demonstrates the complete pipeline from data acquisition and preprocessing to model training, evaluation, and deployment. Additionally, the project emphasizes model interpretability to ensure transparency and trust in the predictions.
 
-[Methodology](https://github.com/NamanSingh69/Calorie-Prediction-Model/wiki/Home/_edit#methodology)
+## Data Description
 
-[Feature Engineering](https://github.com/NamanSingh69/Calorie-Prediction-Model/wiki/Home/_edit#feature-engineering)
+The project utilizes two primary datasets sourced from Kaggle:
 
-[Modeling](https://github.com/NamanSingh69/Calorie-Prediction-Model/wiki/Home/_edit#modeling)
+1. **`exercise.csv`**: Contains detailed exercise metrics for users, including demographic and physiological information.
+2. **`calories.csv`**: Records the number of calories burned by users during their exercise sessions.
 
-[Linear Regression](https://github.com/NamanSingh69/Calorie-Prediction-Model/wiki/Home/_edit#linear-regression)
+Both datasets are merged on the `User_ID` field to create a unified dataset for analysis and modeling.
 
-[Random Forest Regression](https://github.com/NamanSingh69/Calorie-Prediction-Model/wiki/Home/_edit#random-forest-regression)
+### Dataset Fields
 
-[XGBoost Regression](https://github.com/NamanSingh69/Calorie-Prediction-Model/wiki/Home/_edit#xgboost-regression)
+- **`exercise.csv`**
+  - `User_ID`: Unique identifier for each user.
+  - `Gender`: Gender of the user (`male` or `female`).
+  - `Age`: Age of the user in years.
+  - `Height`: Height of the user in centimeters.
+  - `Weight`: Weight of the user in kilograms.
+  - `Duration`: Duration of the exercise session in minutes.
+  - `Heart_Rate`: Average heart rate during the exercise.
+  - `Body_Temp`: Body temperature of the user during exercise.
 
-[Neural Network](https://github.com/NamanSingh69/Calorie-Prediction-Model/wiki/Home/_edit#neural-network)
+- **`calories.csv`**
+  - `User_ID`: Unique identifier for each user.
+  - `Calories`: Number of calories burned during the exercise session.
 
-[Model Evaluation](https://github.com/NamanSingh69/Calorie-Prediction-Model/wiki/Home/_edit#model-evaluation)
+## Project Structure
 
-[Model Interpretability](https://github.com/NamanSingh69/Calorie-Prediction-Model/wiki/Home/_edit#model-interpretability)
+```
+Calories-Burnt-Prediction/
+├── Calories Burnt Prediction Model.pdf
+├── calories.csv
+├── exercise.csv
+├── mlml.ipynb
+├── calories_burnt_xgb_model.pkl
+├── scaler.pkl
+├── README.md
+└── requirements.txt
+```
 
-[SHAP](https://github.com/NamanSingh69/Calorie-Prediction-Model/wiki/Home/_edit#shap)
+### File Descriptions
 
-[LIME](https://github.com/NamanSingh69/Calorie-Prediction-Model/wiki/Home/_edit#lime)
+- **`Calories Burnt Prediction Model.pdf`**
+  - A comprehensive PDF document containing the entire project code along with outputs, visualizations, and detailed explanations.
 
-[Results](https://github.com/NamanSingh69/Calorie-Prediction-Model/wiki/Home/_edit#results)
+- **`calories.csv`**
+  - Dataset containing calorie burn records for users.
 
-[Conclusion](https://github.com/NamanSingh69/Calorie-Prediction-Model/wiki/Home/_edit#conclusion)
+- **`exercise.csv`**
+  - Dataset containing exercise-related metrics for users.
 
-[References](https://github.com/NamanSingh69/Calorie-Prediction-Model/wiki/Home/_edit#references)
+- **`mlml.ipynb`**
+  - The main Jupyter Notebook (`mlml.ipynb`) that hosts the project's code, including data preprocessing, exploratory data analysis (EDA), feature engineering, model training, evaluation, interpretability, and deployment steps.
 
+- **`calories_burnt_xgb_model.pkl`**
+  - The serialized (pickled) trained XGBoost regression model, optimized for predicting calories burned.
 
-Project Overview
+- **`scaler.pkl`**
+  - The serialized `StandardScaler` object used for scaling numerical features, ensuring consistent preprocessing during inference.
 
-The primary objective of this project is to create an accurate and interpretable predictive model that estimates the number of calories burned during physical activities. This model can be instrumental for fitness enthusiasts, health monitoring systems, and personalized training programs. The project leverages machine learning and deep learning techniques, ensuring the model's robustness and generalizability across diverse user profiles.
+- **`README.md`**
+  - This README file providing an overview and instructions for the project.
 
+- **`requirements.txt`**
+  - A list of all Python dependencies required to run the project. *(Note: If not present, you may need to create one based on the imported libraries in `mlml.ipynb`.)*
 
-Dataset
+## Installation
 
-The project utilizes two main datasets:
+To set up the project locally, follow these steps:
 
-Calories.csv: Contains data related to users' calorie expenditure.
+1. **Clone the Repository:**
 
-Exercise.csv: Includes detailed exercise and physiological data from users.
+   ```bash
+   git clone https://github.com/yourusername/Calories-Burnt-Prediction.git
+   cd Calories-Burnt-Prediction
+   ```
 
-Both datasets have been merged and preprocessed to ensure data quality and consistency. The final merged dataset comprises 15,000 entries with 8 features relevant to calorie prediction.
+2. **Create a Virtual Environment:**
 
+   It's recommended to use a virtual environment to manage dependencies.
 
-Key Features
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
 
-Gender: Male or Female
+3. **Install Dependencies:**
 
-Age: Age of the user
+   Install the required Python packages using `pip`.
 
-Height: Height in centimeters
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-Weight: Weight in kilograms
+   *If `requirements.txt` is not provided, you can install the necessary packages manually:*
 
-Duration: Duration of the activity in minutes
+   ```bash
+   pip install numpy pandas matplotlib seaborn scikit-learn xgboost tensorflow scikeras shap lime joblib
+   ```
 
-Heart_Rate: Average heart rate during the activity
+4. **Download Datasets:**
 
-Body_Temp: Body temperature during the activity
+   Ensure that both `exercise.csv` and `calories.csv` are placed in the project directory. These can be obtained from Kaggle or the provided datasets.
 
-Calories: Calories burned (target variable)
+## Usage
 
+### Running the Jupyter Notebook
 
-Methodology
+1. **Launch Jupyter Notebook:**
 
-The project follows a structured approach encompassing data loading, exploration, preprocessing, feature engineering, model training, evaluation, and interpretability. The steps are as follows:
+   ```bash
+   jupyter notebook
+   ```
 
-Data Loading and Merging: Combining the two datasets on the User_ID to create a unified dataset for analysis.
+2. **Open `mlml.ipynb`:**
 
-Data Exploration: Analyzing data distributions, checking for missing values, and understanding data types.
+   Navigate to the `mlml.ipynb` notebook and execute the cells sequentially to run the project.
 
-Feature Engineering: Creating new features like Body Mass Index (BMI), age groups, and interaction terms to enhance model performance.
+### Making Predictions with the Saved Model
 
-Data Preprocessing: Encoding categorical variables, scaling numerical features, and splitting the data into training and testing sets.
+The project includes a function to make predictions on new data using the trained XGBoost model.
 
-Modeling: Implementing various machine learning and deep learning models, including Linear Regression, Random Forest, XGBoost, and Neural Networks.
+1. **Ensure Dependencies are Installed:**
 
-Model Evaluation: Assessing model performance using metrics like Mean Absolute Error (MAE) and R² Score.
+   Make sure all required packages are installed as per the [Installation](#installation) section.
 
-Model Interpretability: Utilizing SHAP and LIME to explain model predictions and understand feature contributions.
+2. **Load the Model and Scaler:**
 
-Hyperparameter Tuning: Optimizing model parameters to enhance performance.
+   The `calories_burnt_xgb_model.pkl` and `scaler.pkl` files are essential for making predictions. Ensure they are present in the project directory.
 
+3. **Use the Prediction Function:**
 
-Feature Engineering
+   Here's an example of how to use the prediction function:
 
-Effective feature engineering is pivotal for enhancing model accuracy. The following features were engineered:
+   ```python
+   import pandas as pd
+   import joblib
 
-BMI (Body Mass Index): Calculated as weight divided by the square of height (kg/m²).
+   def predict_calories(input_data):
+       """
+       Predicts the number of calories burned given input data.
+       
+       Parameters:
+       input_data (dict): Dictionary containing input data with keys:
+           - Gender (str): 'male' or 'female'
+           - Age (float)
+           - Height (float)
+           - Weight (float)
+           - Duration (float)
+           - Heart_Rate (float)
+           - Body_Temp (float)
+       
+       Returns:
+       float: Predicted calories burned.
+       """
+       # Create DataFrame from input data
+       input_df = pd.DataFrame([input_data])
 
-Age Groups: Categorized users into 'Young', 'Middle-aged', and 'Senior' based on age brackets.
+       # Feature Engineering
+       input_df['BMI'] = input_df['Weight'] / (input_df['Height']/100)**2
+       input_df['Duration_HeartRate'] = input_df['Duration'] * input_df['Heart_Rate']
+       input_df['Age_Group'] = pd.cut(input_df['Age'], bins=[0, 30, 50, 100], labels=['Young', 'Middle-aged', 'Senior'])
 
-Duration_HeartRate: An interaction term combining duration and heart rate to capture their combined effect on calorie burn.
+       # One-Hot Encoding
+       input_df = pd.get_dummies(input_df, columns=['Gender', 'Age_Group'], drop_first=True)
 
+       # Ensure all features are present in the same order as training data
+       missing_cols = set(['Age', 'Height', 'Weight', 'Duration', 'Heart_Rate', 'Body_Temp', 'BMI', 
+                           'Duration_HeartRate', 'Gender_male', 'Age_Group_Middle-aged', 'Age_Group_Senior']) - set(input_df.columns)
+       for col in missing_cols:
+           input_df[col] = 0
+       input_df = input_df[['Age', 'Height', 'Weight', 'Duration', 'Heart_Rate', 'Body_Temp', 
+                            'BMI', 'Duration_HeartRate', 'Gender_male', 'Age_Group_Middle-aged', 
+                            'Age_Group_Senior']]
 
-Modeling
+       # Load the scaler
+       scaler = joblib.load('scaler.pkl')
 
-Linear Regression:
-A baseline model to establish a reference point for model performance.
-Random Forest Regression:
-An ensemble learning method using multiple decision trees to improve prediction accuracy and control overfitting.
-XGBoost Regression:
-An advanced gradient boosting algorithm known for its efficiency and performance in handling large datasets.
-Neural Network:
-A deep learning model designed to capture complex nonlinear relationships in the data.
+       # Scale numerical features
+       numerical_features = ['Age', 'Height', 'Weight', 'Duration', 'Heart_Rate', 'Body_Temp', 
+                             'BMI', 'Duration_HeartRate']
+       input_df[numerical_features] = scaler.transform(input_df[numerical_features])
 
+       # Load the saved model
+       model = joblib.load('calories_burnt_xgb_model.pkl')
 
+       # Predict
+       predicted_calories = model.predict(input_df)
 
-Model Evaluation
+       return predicted_calories[0]
 
-Models were evaluated using the following metrics:
+   # Sample input data
+   sample_input = {
+       'Gender': 'female',
+       'Age': 30,
+       'Height': 185,
+       'Weight': 75,
+       'Duration': 45,
+       'Heart_Rate': 120,
+       'Body_Temp': 38.5
+   }
 
-Mean Absolute Error (MAE): Measures the average magnitude of errors in predictions.
+   # Predict calories
+   predicted_calories = predict_calories(sample_input)
 
-R² Score: Indicates the proportion of variance in the target variable explained by the model.
+   print(f"Predicted Calories Burned: {predicted_calories:.2f}")
+   ```
 
+   **Output:**
+   ```
+   Predicted Calories Burned: 226.56
+   ```
 
-Insights
+## Model Explanation
 
-XGBoost Tuned Model outperforms all other models with the lowest MAE and highest R² score.
+The project explores various machine learning models to predict calories burned, including:
 
-Random Forest models also demonstrate strong performance but are slightly less accurate than XGBoost.
+1. **Linear Regression**
+   - **Description:** A baseline regression model that assumes a linear relationship between features and the target variable.
+   - **Performance:** Achieved a Mean Absolute Error (MAE) of ~5.72 and an R² score of ~0.98.
 
-Neural Networks provide good predictions but do not surpass the tree-based models in this setup.
+2. **Random Forest Regressor**
+   - **Description:** An ensemble learning method using multiple decision trees to improve predictive performance.
+   - **Performance:** Initially achieved an MAE of ~1.71 and an R² score of ~1.00. After hyperparameter tuning, MAE slightly improved to ~1.69.
 
+3. **XGBoost Regressor**
+   - **Description:** An optimized gradient boosting framework known for its efficiency and performance.
+   - **Performance:** Initially achieved an MAE of ~1.36 and an R² score of ~1.00. After hyperparameter tuning, MAE further improved to ~1.14.
 
-Model Interpretability
+4. **Neural Network (Deep Learning)**
+   - **Description:** A sequential neural network with dense layers and dropout regularization to predict the target variable.
+   - **Performance:** Achieved an MAE of ~1.47 and an R² score of ~1.00.
 
-Understanding model predictions is crucial for trust and usability. This project employs two powerful interpretability tools:
+### **Conclusion:**
 
-SHAP (SHapley Additive exPlanations)
+- **Best Performer:** The tuned XGBoost model outperformed all other models with the lowest MAE (~1.14) and an R² score close to 1.00, indicating excellent predictive capability.
+- **Model Selection:** Despite similar high R² scores across models, MAE provides a clearer understanding of average prediction errors, making XGBoost the preferred choice.
 
-Purpose: Provides both global and local explanations of model predictions.
+## Model Interpretability
 
-Application: Applied to XGBoost and Random Forest models to visualize feature importance and interaction effects.
+Understanding how models make predictions is crucial for trust and transparency. This project leverages SHAP (SHapley Additive exPlanations) and LIME (Local Interpretable Model-agnostic Explanations) for model interpretability.
 
-Features Identified:
+### SHAP
 
-Duration_HeartRate: Most significant predictor.
+- **Global Interpretation:** SHAP summary plots and dependence plots reveal the overall feature importance and their interactions.
+- **Local Interpretation:** SHAP force plots explain individual predictions by showing the contribution of each feature.
 
-Duration: Strong positive impact on calorie burn.
+### LIME
 
-Heart_Rate: Also a key contributor.
+- **Instance-Level Explanation:** Provides explanations for specific predictions, highlighting which features influenced the model's decision the most for a given instance.
 
-LIME (Local Interpretable Model-Agnostic Explanations)
+## Hyperparameter Tuning
 
-Purpose: Offers local explanations by approximating the model locally with an interpretable model.
+Optimizing model hyperparameters is essential to enhance performance. This project employs `GridSearchCV` for hyperparameter tuning of the Random Forest and XGBoost models.
 
-Application: Applied to the Neural Network model to explain individual predictions.
+### Random Forest
 
-Key Takeaways
+- **Parameters Tuned:**
+  - `n_estimators`: [100, 200, 300]
+  - `max_depth`: [None, 15, 30]
+  - `min_samples_split`: [2, 5]
+  - `min_samples_leaf`: [1, 2]
+  - `bootstrap`: [True, False]
+- **Best Parameters:**
+  ```python
+  {'bootstrap': True, 'max_depth': None, 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 300}
+  ```
+- **Tuned Performance:**
+  - **Test MAE:** ~1.69
+  - **R² Score:** ~1.00
 
-SHAP effectively highlights the most influential features across models, enhancing understanding of model behavior.
+### XGBoost
 
-LIME provides granular insights into individual predictions, albeit with initial preprocessing challenges that were subsequently addressed.
+- **Parameters Tuned:**
+  - `n_estimators`: [100, 200]
+  - `learning_rate`: [0.01, 0.1]
+  - `max_depth`: [3, 5]
+  - `subsample`: [0.8, 1.0]
+  - `colsample_bytree`: [0.8, 1.0]
+- **Best Parameters:**
+  ```python
+  {'colsample_bytree': 1.0, 'learning_rate': 0.1, 'max_depth': 5, 'n_estimators': 200, 'subsample': 0.8}
+  ```
+- **Tuned Performance:**
+  - **Test MAE:** ~1.14
+  - **R² Score:** ~1.00
 
+## Evaluation Metrics
 
-Results
-The project achieved remarkable results, particularly with the XGBoost Tuned Model, which demonstrated exceptional accuracy in predicting calories burned with an MAE of 1.14 and an R² score of 0.99. This indicates near-perfect predictions, showcasing the model's capability to generalize and perform effectively on unseen data.
+The following metrics are used to evaluate model performance:
 
-Neural Network Performance:
-MAE of 1.47 and R² of 1.00.
+- **Mean Absolute Error (MAE):** Measures the average magnitude of errors in predictions, without considering their direction. Lower MAE indicates better performance.
+  
+- **R² Score:** Represents the proportion of variance in the target variable explained by the model. An R² score close to 1 indicates a strong fit.
 
+## Saving and Deployment
 
-Conclusion
+The project includes mechanisms to save the trained model and scaler for deployment:
 
-This project successfully developed a highly accurate model for predicting calories burned using advanced machine learning techniques. The XGBoost Tuned Model stood out as the most effective, providing reliable and precise predictions. Model interpretability tools like SHAP and LIME were instrumental in understanding feature impacts, fostering trust in the model's decisions.
+- **Model Saving:**
+  - **`calories_burnt_xgb_model.pkl`**: Serialized XGBoost model.
+  
+- **Scaler Saving:**
+  - **`scaler.pkl`**: Serialized `StandardScaler` object for consistent feature scaling during inference.
 
+### Making Predictions with New Data
 
-Key Achievements
+A prediction function `predict_calories` is provided to generate calorie burn predictions for new user data. This function handles data preprocessing, feature engineering, scaling, and model inference seamlessly.
 
-Accurate Predictions: Achieved low MAE and high R² scores with tree-based models.
-Comprehensive Feature Engineering: Enhanced model performance through thoughtful feature creation and selection.
-Model Interpretability: Utilized SHAP and LIME to demystify model predictions, ensuring transparency.
-Hyperparameter Optimization: Fine-tuned models to extract optimal performance.
+**Example Usage:**
 
+```python
+# Sample input data
+sample_input = {
+    'Gender': 'female',
+    'Age': 30,
+    'Height': 185,
+    'Weight': 75,
+    'Duration': 45,
+    'Heart_Rate': 120,
+    'Body_Temp': 38.5
+}
 
-References
-Scikit-learn Documentation: https://scikit-learn.org/stable/documentation.html
-XGBoost Documentation: https://xgboost.readthedocs.io/en/latest/
-TensorFlow Keras Documentation: https://www.tensorflow.org/guide/keras
-SHAP Documentation: https://shap.readthedocs.io/en/latest/
-LIME Documentation: https://lime-ml.readthedocs.io/en/latest/
+# Predict calories
+predicted_calories = predict_calories(sample_input)
+
+print(f"Predicted Calories Burned: {predicted_calories:.2f}")
+```
+
+**Output:**
+```
+Predicted Calories Burned: 226.56
+```
+
+## Contributing
+
+Contributions are welcome! Please follow these steps:
+
+1. **Fork the Repository**
+
+2. **Create a New Branch**
+   ```bash
+   git checkout -b feature/YourFeature
+   ```
+
+3. **Commit Your Changes**
+   ```bash
+   git commit -m "Add your feature"
+   ```
+
+4. **Push to the Branch**
+   ```bash
+   git push origin feature/YourFeature
+   ```
+
+5. **Open a Pull Request**
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
+## Acknowledgements
+
+- **Kaggle:** For providing the datasets.
+- **OpenAI's ChatGPT:** For assisting in project documentation and explanations.
+- **Community Contributors:** For their valuable insights and support.
+
+---
+
+**Note:** The project achieves exceptionally high R² scores close to 1.00, which is uncommon and may indicate potential overfitting or data leakage. It's crucial to ensure that the data preprocessing and model training steps are correctly implemented to maintain model integrity.
