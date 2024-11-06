@@ -94,7 +94,7 @@ To set up the project locally, follow these steps:
 1. **Clone the Repository:**
 
    ```bash
-   git clone https://github.com/yourusername/Calories-Burnt-Prediction.git
+   git clone https://github.com/NamanSingh69/Calories-Burnt-Prediction.git
    cd Calories-Burnt-Prediction
    ```
 
