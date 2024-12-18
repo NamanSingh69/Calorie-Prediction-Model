@@ -244,33 +244,29 @@ The project explores various machine learning models to predict calories burned,
 
 2. **Random Forest Regressor**
    - **Description:** An ensemble learning method using multiple decision trees to improve predictive performance.
-   - **Performance:** Initially achieved an MAE of ~1.71 and an R² score of ~1.00. After hyperparameter tuning, MAE slightly improved to ~1.69.
+   - **Performance:** Initially achieved an MAE of ~1.71 and an R² score of ~0.99. After hyperparameter tuning, MAE slightly improved to ~1.68.
 
 3. **XGBoost Regressor**
    - **Description:** An optimized gradient boosting framework known for its efficiency and performance.
-   - **Performance:** Initially achieved an MAE of ~1.36 and an R² score of ~1.00. After hyperparameter tuning, MAE further improved to ~1.14.
+   - **Performance:** Initially achieved an MAE of ~1.36 and an R² score of ~0.99. After hyperparameter tuning, MAE further improved to ~1.13.
 
 4. **Neural Network (Deep Learning)**
    - **Description:** A sequential neural network with dense layers and dropout regularization to predict the target variable.
-   - **Performance:** Achieved an MAE of ~1.47 and an R² score of ~1.00.
+   - **Performance:** Achieved an MAE of ~1.62 and an R² score of ~0.99.
 
 ### **Conclusion:**
 
-- **Best Performer:** The tuned XGBoost model outperformed all other models with the lowest MAE (~1.14) and an R² score close to 1.00, indicating excellent predictive capability.
+- **Best Performer:** The tuned XGBoost model outperformed all other models with the lowest MAE (~1.13) and an R² score close to 1.00, indicating excellent predictive capability.
 - **Model Selection:** Despite similar high R² scores across models, MAE provides a clearer understanding of average prediction errors, making XGBoost the preferred choice.
 
 ## Model Interpretability
 
-Understanding how models make predictions is crucial for trust and transparency. This project leverages SHAP (SHapley Additive exPlanations) and LIME (Local Interpretable Model-agnostic Explanations) for model interpretability.
+Understanding how models make predictions is crucial for trust and transparency. This project leverages SHAP (SHapley Additive exPlanations) and is plotted.
 
 ### SHAP
 
 - **Global Interpretation:** SHAP summary plots and dependence plots reveal the overall feature importance and their interactions.
 - **Local Interpretation:** SHAP force plots explain individual predictions by showing the contribution of each feature.
-
-### LIME
-
-- **Instance-Level Explanation:** Provides explanations for specific predictions, highlighting which features influenced the model's decision the most for a given instance.
 
 ## Hyperparameter Tuning
 
@@ -289,8 +285,8 @@ Optimizing model hyperparameters is essential to enhance performance. This proje
   {'bootstrap': True, 'max_depth': None, 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 300}
   ```
 - **Tuned Performance:**
-  - **Test MAE:** ~1.69
-  - **R² Score:** ~1.00
+  - **Test MAE:** ~1.68
+  - **R² Score:** ~0.99
 
 ### XGBoost
 
@@ -305,8 +301,8 @@ Optimizing model hyperparameters is essential to enhance performance. This proje
   {'colsample_bytree': 1.0, 'learning_rate': 0.1, 'max_depth': 5, 'n_estimators': 200, 'subsample': 0.8}
   ```
 - **Tuned Performance:**
-  - **Test MAE:** ~1.14
-  - **R² Score:** ~1.00
+  - **Test MAE:** ~1.13
+  - **R² Score:** ~0.99
 
 ## Evaluation Metrics
 
@@ -336,10 +332,10 @@ A prediction function `predict_calories` is provided to generate calorie burn pr
 # Sample input data
 sample_input = {
     'Gender': 'female',
-    'Age': 30,
-    'Height': 185,
+    'Age': 28,
+    'Height': 170,
     'Weight': 75,
-    'Duration': 45,
+    'Duration': 30,
     'Heart_Rate': 120,
     'Body_Temp': 38.5
 }
@@ -352,7 +348,7 @@ print(f"Predicted Calories Burned: {predicted_calories:.2f}")
 
 **Output:**
 ```
-Predicted Calories Burned: 226.56
+Predicted Calories Burned: 224.70
 ```
 
 ## Contributing
