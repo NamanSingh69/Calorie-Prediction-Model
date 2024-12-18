@@ -215,10 +215,10 @@ The project includes a function to make predictions on new data using the traine
    # Sample input data
    sample_input = {
        'Gender': 'female',
-       'Age': 30,
-       'Height': 185,
+       'Age': 28,
+       'Height': 170,
        'Weight': 75,
-       'Duration': 45,
+       'Duration': 30,
        'Heart_Rate': 120,
        'Body_Temp': 38.5
    }
@@ -231,7 +231,7 @@ The project includes a function to make predictions on new data using the traine
 
    **Output:**
    ```
-   Predicted Calories Burned: 226.56
+   Predicted Calories Burned: 224.70
    ```
 
 ## Model Explanation
